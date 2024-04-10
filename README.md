@@ -43,3 +43,7 @@
 
 ![Alt text](project-imgs/profileUpdatePage.png)
 可以更新自己的头像,username,email,password 信息
+
+# Socket.io 的使用
+
+![Alt text](project-imgs/动画.gif)
