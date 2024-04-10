@@ -7,6 +7,8 @@ export const verifyToken = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
     if (err) return res.status(403).json({ message: "Token is not Valid!" });
+
+    //通过校验后根据payload设置用户id
     req.userId = payload.id;
 
     next();

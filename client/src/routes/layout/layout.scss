@@ -27,6 +27,7 @@
 
   .content {
     // flex: 1;
+    //只使用flex会出现滚动条无法滑动的问题
     height: calc(100vh - 100px);
   }
 }

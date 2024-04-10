@@ -2,7 +2,7 @@ import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 
 export const getPosts = async (req, res) => {
-  console.log("getPosts方法");
+  // console.log("getPosts");
   const query = req.query;
 
   try {
@@ -29,7 +29,7 @@ export const getPosts = async (req, res) => {
 };
 
 export const getPost = async (req, res) => {
-  console.log("getPost方法");
+  // console.log("getPost");
   const id = req.params.id;
   try {
     const post = await prisma.post.findUnique({

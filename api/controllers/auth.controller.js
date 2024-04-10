@@ -6,13 +6,11 @@ export const register = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    // HASH THE PASSWORD
-
+    //bcrypt执行的散列是CPU密集型的 最好使用异步方法
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    console.log(hashedPassword);
+    // console.log(hashedPassword);
 
-    // CREATE A NEW USER AND SAVE TO DB
     const newUser = await prisma.user.create({
       data: {
         username,
@@ -34,22 +32,16 @@ export const login = async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // CHECK IF THE USER EXISTS
-
     const user = await prisma.user.findUnique({
       where: { username },
     });
-
-    if (!user) return res.status(400).json({ message: "Invalid Credentials!" });
-
-    // CHECK IF THE PASSWORD IS CORRECT
+    // console.log(user, Object.prototype.toString.call(user));
+    if (!user) return res.status(400).json({ message: "Not Found Username!" });
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid)
-      return res.status(400).json({ message: "Invalid Credentials!" });
-
-    // GENERATE COOKIE TOKEN AND SEND TO THE USER
+      return res.status(400).json({ message: "Password Error!" });
 
     // res.setHeader("Set-Cookie", "test=" + "myValue").json("success")
     const age = 1000 * 60 * 60 * 24 * 7;

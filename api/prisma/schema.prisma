@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  
 }
 
 datasource db {
@@ -66,7 +67,7 @@ model SavedPost {
   userId    String   @unique @db.ObjectId
   postId    String   @unique @db.ObjectId
   createdAt DateTime @default(now())
-
+//组合必须是唯一的
   @@unique([userId, postId])
 }
 

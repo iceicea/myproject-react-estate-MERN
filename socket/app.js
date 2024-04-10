@@ -6,6 +6,7 @@ const io = new Server({
   },
 });
 
+//管理在线用户
 let onlineUser = [];
 // console.log({ onlineUser });
 const addUser = (userId, socketId) => {
@@ -32,7 +33,7 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", ({ receiverId, data }) => {
     const receiver = getUser(receiverId);
-    console.log(receiver);
+    // console.log(receiver);
 
     io.to(receiver.socketId).emit("getMessage", data);
   });

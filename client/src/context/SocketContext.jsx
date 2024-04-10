@@ -11,7 +11,7 @@ export const SocketContextProvider = ({ children }) => {
   useEffect(() => {
     setSocket(io("http://localhost:4000"));
   }, []);
-  2;
+
   useEffect(() => {
     currentUser && socket?.emit("newUser", currentUser.id);
   }, [currentUser, socket]);

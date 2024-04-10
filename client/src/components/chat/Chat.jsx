@@ -41,7 +41,7 @@ function Chat({ chats }) {
     try {
       const res = await apiRequest.post("/messages/" + chat.id, { text });
       setChat((prev) => ({ ...prev, messages: [...prev.messages, res.data] }));
-      e.target.reset();
+      e.target.reset(); //send后清空每次的输入
       console.log(chat);
       socket.emit("sendMessage", {
         receiverId: chat.receiver.id,

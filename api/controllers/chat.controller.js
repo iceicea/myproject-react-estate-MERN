@@ -7,11 +7,12 @@ export const getChats = async (req, res) => {
     const chats = await prisma.chat.findMany({
       where: {
         userIDs: {
+          //查找自己相关的chats
           hasSome: [tokenUserId],
         },
       },
     });
-
+    //为每一个chat都设置receiver
     for (const chat of chats) {
       const receiverId = chat.userIDs.find((id) => id !== tokenUserId);
 
@@ -55,7 +56,7 @@ export const getChat = async (req, res) => {
         },
       },
     });
-
+    //被谁访问了? 要记录在seenBy中
     await prisma.chat.update({
       where: {
         id: req.params.id,
@@ -88,6 +89,7 @@ export const addChat = async (req, res) => {
   }
 };
 
+//控制已读状态
 export const readChat = async (req, res) => {
   const tokenUserId = req.userId;
 

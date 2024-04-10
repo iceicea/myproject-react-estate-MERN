@@ -8,7 +8,7 @@ function Login() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const {updateUser} = useContext(AuthContext)
+  const { updateUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -26,8 +26,8 @@ function Login() {
         username,
         password,
       });
-
-      updateUser(res.data)
+      //更新全局的登录状态
+      updateUser(res.data);
 
       navigate("/");
     } catch (err) {
